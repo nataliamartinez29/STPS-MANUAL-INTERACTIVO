@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cuadernillo Interactivo — STPS (Seguridad y Salud en el Trabajo)</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    :root{
+      --brand:#0ea5e9; /* sky-500 */
+      --brand-dark:#0369a1; /* sky-700 */
+      --accent:#22c55e; /* green-500 */
+      --ink:#0f172a; /* slate-900 */
+      --muted:#64748b;/* slate-500 */
+      --bg:#f8fafc; /* slate-50 */
+    }
+    html,body{background:var(--bg); color:var(--ink);}    
+    .navbar{background:linear-gradient(90deg,var(--brand),var(--brand-dark));}
+    .navbar-brand, .navbar .nav-link{color:white!important}
+
+    #cuadernillo .carousel-item{min-height: 82vh; padding: 2rem 1rem;}
+    .slide-card{background:white; border-radius:1.25rem; box-shadow:0 15px 35px rgba(2,6,23,.1); padding:1.5rem;}
+    .slide-title{font-weight:800; letter-spacing:.2px; color:var(--brand-dark)}
+    .badge-mini{background:var(--accent);}
+    .pill{display:inline-block; padding:.3rem .6rem; border-radius:999px; background:#e2f8ee; color:#065f46; font-weight:600; font-size:.85rem}
+    .tip{background:#fff8db; border-left:6px solid #f59e0b; padding: .75rem 1rem; border-radius:.75rem}
+    .glass{backdrop-filter: blur(6px); background:rgba(255,255,255,.75); border-radius:1rem}
+    .stamp{position:absolute; top:12px; right:12px; background:#e2e8f0; color:#0f172a; padding:.3rem .6rem; border-radius:.5rem; font-size:.75rem}
+    .shadow-soft{box-shadow:0 10px 30px rgba(2,6,23,.08)}
+    .floating{animation:float 4s ease-in-out infinite}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+    .checklist input[type="checkbox"]{transform:scale(1.2); margin-right:.5rem}
+    .qr{width:110px; height:110px; border-radius:.75rem; border:3px solid #e2e8f0}
+    .gif{max-height:140px; border-radius:1rem}
+    .kbd{border:1px solid #cbd5e1; padding:.1rem .4rem; border-radius:.4rem; background:#f1f5f9; font-weight:600}
+
+    /* Mini crucigrama */
+    .crossword{display:grid; grid-template-columns:repeat(9, 32px); gap:4px; justify-content:center}
+    .cell{width:32px; height:32px; text-transform:uppercase; border-radius:.4rem; border:1px solid #cbd5e1; text-align:center; font-weight:700}
+    .cell:focus{outline:2px solid var(--brand)}
+    .cell.block{background:#cbd5e1}
+
+    /* Progress dots */
+    .carousel-indicators [data-bs-target]{width:10px; height:10px; border-radius:50%}
+
+    /* Footer ribbon */
+    .ribbon{position:fixed; bottom:12px; right:12px; background:white; border:1px solid #e2e8f0; box-shadow:0 10px 20px rgba(2,6,23,.08); padding:.5rem .75rem; border-radius:999px; z-index:1000}
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">Cuadernillo STPS · Salud Ocupacional</a>
+      <div class="d-flex gap-2">
+        <a class="btn btn-sm btn-light" target="_blank" href="https://www.stps.gob.mx/bp/secciones/conoce/quienes_somos/quienes_somos/historia_stps.htm"><i class="bi bi-journal-text me-1"></i>Historia STPS</a>
+        <a class="btn btn-sm btn-outline-light" target="_blank" href="https://organismosprivados.stps.gob.mx/organismosprivados/normas01.html"><i class="bi bi-card-checklist me-1"></i>NOM STPS</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-3" id="cuadernillo">
+    <div id="carouselCuadernillo" class="carousel slide" data-bs-ride="false" data-bs-touch="true">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselCuadernillo" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Portada"></button>
+        <button type="button" data-bs-target="#carouselCuadernillo" data-bs-slide-to="1" aria-label="STPS"></button>
+        <button type="button" data-bs-target="#carouselCuadernillo" data-bs-slide-to="2" aria-label="Marco Normativo"></button>
+        <button type="button" data-bs-target="#carouselCuadernillo" data-bs-slide-to="3" aria-label="NOM-030"></button>
+        <button type="button" data-bs-target="#carouselCuadernillo" data-bs-slide-to="4" aria-label="NOM-017"></button>
+        <button type="button" data-bs-target="#carouselCuadernillo" data-bs-slide-to="5" aria-label="NOM-019"></button>
+        <button type="button" data-bs-target="#carouselCuadernillo" data-bs-slide-to="6" aria-label="NOM-035"></button>
+        <button type="button" data-bs-target="#carouselCuadernillo" data-bs-slide-to="7" aria-label="NOM-036-1"></button>
+        <button type="button" data-bs-target="#carouselCuadernillo" data-bs-slide-to="8" aria-label="Actividades"></button>
+        <button type="button" data-bs-target="#carouselCuadernillo" data-bs-slide-to="9" aria-label="Crucigrama"></button>
+        <button type="button" data-bs-target="#carouselCuadernillo" data-bs-slide-to="10" aria-label="Recursos"></button>
+      </div>
+
+      <div class="carousel-inner">
+        <!-- Slide 0: Portada -->
+        <div class="carousel-item active">
+          <div class="slide-card position-relative">
+            <span class="stamp">Cuadernillo digital • 2025</span>
+            <div class="row align-items-center g-4">
+              <div class="col-lg-6">
+                <h1 class="slide-title display-5">Marco Normativo de la <span class="text-primary">STPS</span></h1>
+                <p class="lead">Compendio interactivo para abrir el tema de <strong>legislación en salud ocupacional</strong>: incapacidades, enfermedades y seguimiento a la salud en el trabajo.</p>
+                <div class="d-flex gap-2 flex-wrap">
+                  <span class="pill"><i class="bi bi-shield-check me-1"></i>Seguridad</span>
+                  <span class="pill"><i class="bi bi-heart-pulse me-1"></i>Salud</span>
+                  <span class="pill"><i class="bi bi-journal-text me-1"></i>NOM STPS</span>
+                  <span class="pill"><i class="bi bi-activity me-1"></i>Actividades</span>
+                </div>
+                <div class="tip mt-3"><strong>Mini tip:</strong> Puedes navegar con las flechas del teclado <span class="kbd">←</span> <span class="kbd">→</span> o con los puntitos inferiores.</div>
+              </div>
+              <div class="col-lg-6 text-center">
+                <img class="gif floating shadow-soft" alt="GIF seguridad" src="https://media.giphy.com/media/26u4lOMA8JKSnL9Uk/giphy.gif" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 1: ¿Qué es la STPS? - Resumen breve -->
+        <div class="carousel-item">
+          <div class="slide-card">
+            <div class="row g-4 align-items-center">
+              <div class="col-lg-7">
+                <h2 class="slide-title h1 mb-3">¿Qué es la STPS?</h2>
+                <ul class="fs-5 mb-3">
+                  <li>Dependencia federal que vigila el <strong>cumplimiento de la LFT</strong> y promueve <strong>seguridad y salud en el trabajo</strong>.</li>
+                  <li>Origen: <em>Departamento del Trabajo</em> creado en 1911; se convierte en <strong>STPS</strong> en 1940.</li>
+                  <li>Impulsa organismos y comisiones como la <strong>JFCA</strong> y la <strong>PROFEDET</strong>.</li>
+                </ul>
+                <div class="tip"><strong>Mini tip:</strong> Revisa la <a target="_blank" href="https://www.stps.gob.mx/bp/secciones/conoce/quienes_somos/quienes_somos/historia_stps.htm">historia oficial</a> para contexto histórico en tu introducción.</div>
+              </div>
+              <div class="col-lg-5 text-center">
+                <img class="img-fluid rounded-4 shadow-soft" alt="Portada STPS" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Logotipo_del_Gobierno_de_M%C3%A9xico_%282018%29.svg/512px-Logotipo_del_Gobierno_de_M%C3%A9xico_%282018%29.svg.png">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2: Marco Normativo STPS -->
+        <div class="carousel-item">
+          <div class="slide-card">
+            <h2 class="slide-title h1 mb-3">Marco Normativo en SST</h2>
+            <div class="row g-4 align-items-stretch">
+              <div class="col-lg-6">
+                <div class="glass p-3 h-100">
+                  <h3 class="h5">Pirámide rápida</h3>
+                  <ol class="mb-2">
+                    <li><strong>Constitución (Art. 123)</strong></li>
+                    <li><strong>Ley Federal del Trabajo</strong> y Reglamentos</li>
+                    <li><strong>NOM STPS</strong> (obligatorias)</li>
+                    <li>Lineamientos, guías y <em>buenas prácticas</em></li>
+                  </ol>
+                  <p class="mb-0"><span class="badge bg-primary">Clave</span> Las <strong>NOM</strong> detallan requisitos técnicos mínimos para prevenir <em>accidentes</em> y <em>enfermedades de trabajo</em>.</p>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="glass p-3 h-100">
+                  <h3 class="h5">NOM prioritarias en salud ocupacional</h3>
+                  <ul class="mb-3">
+                    <li><strong>NOM-030-2009:</strong> Servicios preventivos de seguridad y salud.</li>
+                    <li><strong>NOM-017-2008:</strong> Equipo de Protección Personal (EPP).</li>
+                    <li><strong>NOM-019-2011:</strong> Comisiones de seguridad e higiene.</li>
+                    <li><strong>NOM-035-2018:</strong> Riesgo psicosocial.</li>
+                    <li><strong>NOM-036-1-2018:</strong> Factores ergonómicos (cargas).</li>
+                  </ul>
+                  <div class="d-flex gap-2 flex-wrap">
+                    <img class="qr" alt="QR NOM STPS" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://organismosprivados.stps.gob.mx/organismosprivados/normas01.html" />
+                    <img class="qr" alt="QR Historia STPS" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.stps.gob.mx/bp/secciones/conoce/quienes_somos/quienes_somos/historia_stps.htm" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: NOM-030 -->
+        <div class="carousel-item">
+          <div class="slide-card">
+            <h2 class="slide-title h1">NOM-030-STPS-2009</h2>
+            <p class="lead">Servicios preventivos de seguridad y salud en el trabajo — <strong>Funciones y actividades</strong>.</p>
+            <div class="row g-4">
+              <div class="col-md-7">
+                <ul class="fs-5">
+                  <li>Establece el <strong>servicio preventivo</strong> (interno/externo) y su <strong>programa anual</strong>.</li>
+                  <li>Integra diagnóstico, capacitación, investigación de incidentes y <strong>vigilancia a la salud</strong>.</li>
+                  <li>Enlace con <strong>Comisión de Seguridad e Higiene</strong> y registro documental.</li>
+                </ul>
+                <div class="tip"><strong>Mini tip:</strong> Muestra formatos del programa de seguridad y salud, y crea un calendario visual.</div>
+              </div>
+              <div class="col-md-5 text-center">
+                <img class="img-fluid rounded-4 shadow-soft" alt="Servicios preventivos" src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1200&auto=format&fit=crop" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4: NOM-017 EPP -->
+        <div class="carousel-item">
+          <div class="slide-card">
+            <h2 class="slide-title h1">NOM-017-STPS-2008</h2>
+            <p class="lead">Selección, uso y manejo del <strong>Equipo de Protección Personal</strong>.</p>
+            <div class="row g-4">
+              <div class="col-md-7">
+                <ul class="fs-5">
+                  <li>Identifica peligros → define <strong>EPP</strong> por puesto y tarea.</li>
+                  <li>Capacitación y <strong>reposición</strong> del EPP; limpieza y resguardo.</li>
+                  <li>Señalización y compatibilidad con otros controles.</li>
+                </ul>
+                <div class="checklist">
+                  <label class="me-3"><input type="checkbox">Casco</label>
+                  <label class="me-3"><input type="checkbox">Guantes</label>
+                  <label class="me-3"><input type="checkbox">Lentes</label>
+                  <label class="me-3"><input type="checkbox">Auditivo</label>
+                </div>
+              </div>
+              <div class="col-md-5 text-center">
+                <img class="img-fluid rounded-4 shadow-soft" alt="EPP" src="https://images.unsplash.com/photo-1580060839134-75a5edca2e47?q=80&w=1200&auto=format&fit=crop" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 5: NOM-019 Comisiones -->
+        <div class="carousel-item">
+          <div class="slide-card">
+            <h2 class="slide-title h1">NOM-019-STPS-2011</h2>
+            <p class="lead">Comisiones de Seguridad e Higiene — <strong>Constitución y funciones</strong>.</p>
+            <ul class="fs-5">
+              <li>Integración bipartita (patrón–trabajadores) y <strong>actas de recorridos</strong>.</li>
+              <li>Investigación de incidentes/accidentes y propuesta de <strong>acciones correctivas</strong>.</li>
+              <li>Vinculación con capacitación y <strong>programa anual</strong>.</li>
+            </ul>
+            <div class="tip"><strong>Mini tip:</strong> Incluye una <em>checklist</em> mensual de recorridos y hallazgos críticos.</div>
+          </div>
+        </div>
+
+        <!-- Slide 6: NOM-035 Psicosocial -->
+        <div class="carousel-item">
+          <div class="slide-card">
+            <h2 class="slide-title h1">NOM-035-STPS-2018</h2>
+            <p class="lead">Factores de riesgo <strong>psicosocial</strong> — Identificación, análisis y prevención.</p>
+            <div class="row g-4 align-items-center">
+              <div class="col-md-7">
+                <ul class="fs-5">
+                  <li>Política y <strong>medidas de prevención</strong> (jornadas, cargas, violencia).</li>
+                  <li>Evaluaciones según tamaño del centro de trabajo.</li>
+                  <li>Acciones de <strong>atención y canalización</strong>.</li>
+                </ul>
+                <div class="d-flex gap-3">
+                  <a class="btn btn-outline-primary" target="_blank" href="https://www.youtube.com/@stpsmx"><i class="bi bi-youtube me-1"></i>Videos STPS</a>
+                  <a class="btn btn-outline-secondary" target="_blank" href="https://organismosprivados.stps.gob.mx/organismosprivados/normas01.html#NOM-035-STPS-2018">Texto NOM</a>
+                </div>
+              </div>
+              <div class="col-md-5 text-center">
+                <img class="img-fluid rounded-4 shadow-soft" alt="Bienestar emocional" src="https://images.unsplash.com/photo-1517245386807-9b4913f4d1ee?q=80&w=1200&auto=format&fit=crop" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 7: NOM-036-1 Ergonomía -->
+        <div class="carousel-item">
+          <div class="slide-card">
+            <h2 class="slide-title h1">NOM-036-1-STPS-2018</h2>
+            <p class="lead">Factores de riesgo <strong>ergonómico</strong> — Parte 1: <strong>Manejo manual de cargas</strong>.</p>
+            <div class="row g-4">
+              <div class="col-md-7">
+                <ul class="fs-5">
+                  <li>Identifica tareas con <strong>sobre-esfuerzo</strong> y posturas forzadas.</li>
+                  <li>Medidas: rediseño, ayudas mecánicas y <strong>límites de peso</strong>.</li>
+                  <li>Capacitación en <strong>técnicas de levantamiento</strong>.</li>
+                </ul>
+                <div class="tip"><strong>Mini tip:</strong> Agrega <em>pictogramas</em> en áreas de riesgo para recordar buenas posturas.</div>
+              </div>
+              <div class="col-md-5 text-center">
+                <img class="img-fluid rounded-4 shadow-soft" alt="Ergonomía" src="https://images.unsplash.com/photo-1581090464761-52b8d0894919?q=80&w=1200&auto=format&fit=crop" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 8: Actividades rápidas (quiz) -->
+        <div class="carousel-item">
+          <div class="slide-card">
+            <div class="row g-4 align-items-center">
+              <div class="col-lg-6">
+                <h2 class="slide-title h1">Actividad 1 — Quiz relámpago</h2>
+                <p>Marca la respuesta. <span class="badge bg-success">Autoevalúa</span></p>
+                <ol id="quiz" class="fs-6">
+                  <li class="mb-2">¿Qué NOM define funciones del servicio preventivo? <br>
+                    <button class="btn btn-sm btn-outline-primary mt-2" data-answer="ok">NOM-030</button>
+                    <button class="btn btn-sm btn-outline-secondary mt-2">NOM-017</button>
+                  </li>
+                  <li class="mb-2">¿Qué norma regula los riesgos psicosociales? <br>
+                    <button class="btn btn-sm btn-outline-primary mt-2" data-answer="ok">NOM-035</button>
+                    <button class="btn btn-sm btn-outline-secondary mt-2">NOM-029</button>
+                  </li>
+                  <li class="mb-2">La selección de EPP corresponde a… <br>
+                    <button class="btn btn-sm btn-outline-primary mt-2" data-answer="ok">NOM-017</button>
+                    <button class="btn btn-sm btn-outline-secondary mt-2">NOM-025</button>
+                  </li>
+                </ol>
+                <div id="quizResult" class="alert alert-info d-none">¡Bien! Respuestas correctas marcadas en verde.</div>
+              </div>
+              <div class="col-lg-6">
+                <h2 class="slide-title h1">Actividad 2 — Checklist SST</h2>
+                <ul class="list-group shadow-soft">
+                  <li class="list-group-item"><input class="form-check-input me-2" type="checkbox"> Diagnóstico de seguridad y salud actualizado</li>
+                  <li class="list-group-item"><input class="form-check-input me-2" type="checkbox"> Comisión de Seguridad e Higiene vigente</li>
+                  <li class="list-group-item"><input class="form-check-input me-2" type="checkbox"> Programa anual con metas y responsables</li>
+                  <li class="list-group-item"><input class="form-check-input me-2" type="checkbox"> Capacitación y EPP entregado</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 9: Mini crucigrama NOM -->
+        <div class="carousel-item">
+          <div class="slide-card">
+            <h2 class="slide-title h1">Actividad 3 — Mini crucigrama NOM</h2>
+            <p class="mb-2">Completa con letras (usa mayúsculas). <span class="badge bg-primary">Pista:</span> normas clave de SST.</p>
+            <div class="crossword mb-3" id="cw">
+              <!-- 9x9 simple layout; blocks with .block -->
+              <!-- ROW 1: N O M 0 3 0 -->
+              <input class="cell" maxlength="1" data-solution="N">
+              <input class="cell" maxlength="1" data-solution="O">
+              <input class="cell" maxlength="1" data-solution="M">
+              <div class="cell block"></div>
+              <input class="cell" maxlength="1" data-solution="0">
+              <input class="cell" maxlength="1" data-solution="3">
+              <input class="cell" maxlength="1" data-solution="0">
+              <div class="cell block"></div>
+              <input class="cell" maxlength="1" data-solution="E">
+              <!-- ROW 2 -->
+              <input class="cell" maxlength="1" data-solution="R">
+              <div class="cell block"></div>
+              <input class="cell" maxlength="1" data-solution="M">
+              <div class="cell block"></div>
+              <input class="cell" maxlength="1" data-solution="N">
+              <div class="cell block"></div>
+              <input class="cell" maxlength="1" data-solution="P">
+              <div class="cell block"></div>
+              <input class="cell" maxlength="1" data-solution="P">
+              <!-- ROW 3: 0 1 7 -->
+              <input class="cell" maxlength="1" data-solution="G">
+              <input class="cell" maxlength="1" data-solution="I">
+              <input class="cell" maxlength="1" data-solution="E">
+              <div class="cell block"></div>
+              <input class="cell" maxlength="1" data-solution="0">
+              <input class="cell" maxlength="1" data-solution="1">
+              <input class="cell" maxlength="1" data-solution="7">
+              <div class="cell block"></div>
+              <input class="cell" maxlength="1" data-solution="S">
+              <!-- ROW 4: P S I C O -->
+              <input class="cell" maxlength="1" data-solution="P">
+              <input class="cell" maxlength="1" data-solution="S">
+              <input class="cell" maxlength="1" data-solution="I">
+              <input class="cell" maxlength="1" data-solution="C">
+              <input class="cell" maxlength="1" data-solution="O">
+              <div class="cell block"></div>
+              <input class="cell" maxlength="1" data-solution="3">
+              <div class="cell block"></div>
+              <input class="cell" maxlength="1" data-solution="T">
+              <!-- ROW 5: 0 3 5  E R G O -->
+              <input class="cell" maxlength="1" data-solution="0">
+              <input class="cell" maxlength="1" data-solution="3">
+              <input class="cell" maxlength="1" data-solution="5">
+              <div class="cell block"></div>
+              <input class="cell" maxlength="1" data-solution="E">
+              <input class="cell" maxlength="1" data-solution="R">
+              <input class="cell" maxlength="1" data-solution="G">
+              <input class="cell" maxlength="1" data-solution="O">
+              <input class="cell" maxlength="1" data-solution="N">
+            </div>
+            <div class="d-flex gap-2">
+              <button id="btnCheckCw" class="btn btn-primary"><i class="bi bi-check2-circle me-1"></i>Comprobar</button>
+              <button id="btnClearCw" class="btn btn-outline-secondary"><i class="bi bi-eraser me-1"></i>Limpiar</button>
+            </div>
+            <small class="text-muted d-block mt-2">Soluciones escondidas: NOM-030, NOM-017, PSICO (NOM-035), ERGON (NOM-036).</small>
+          </div>
+        </div>
+
+        <!-- Slide 10: Recursos y enlaces -->
+        <div class="carousel-item">
+          <div class="slide-card">
+            <h2 class="slide-title h1">Recursos rápidos</h2>
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="p-3 glass h-100">
+                  <h3 class="h5 mb-3"><i class="bi bi-link-45deg me-1"></i>Enlaces clave</h3>
+                  <ul>
+                    <li><a target="_blank" href="https://organismosprivados.stps.gob.mx/organismosprivados/normas01.html">Listado de NOM-STPS (oficial)</a></li>
+                    <li><a target="_blank" href="https://www.stps.gob.mx/bp/secciones/conoce/quienes_somos/quienes_somos/historia_stps.htm">Historia y atribuciones STPS</a></li>
+                    <li><a target="_blank" href="https://www.youtube.com/@stpsmx">Canal de YouTube STPS</a></li>
+                  </ul>
+                  <div class="mt-2">
+                    <img class="qr" alt="QR cuadernillo" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://organismosprivados.stps.gob.mx/organismosprivados/normas01.html" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-3 glass h-100">
+                  <h3 class="h5 mb-3"><i class="bi bi-lightbulb me-1"></i>Ideas para enriquecer</h3>
+                  <ul class="mb-2">
+                    <li>Agrega <strong>evidencias</strong> (fotos) de EPP y señalización real de tu centro.</li>
+                    <li>Inserta <strong>formularios</strong> (Google Forms) para reportes anónimos de riesgo.</li>
+                    <li>Incluye códigos QR a <strong>procedimientos internos</strong> y políticas.</li>
+                  </ul>
+                  <img class="gif" alt="GIF idea" src="https://media.giphy.com/media/l0Iyk8L7D7vfH6pAA/giphy.gif">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselCuadernillo" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselCuadernillo" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
+    </div>
+  </main>
+
+  <div class="ribbon">
+    <span class="me-2">Exporta a PDF con <span class="kbd">Ctrl/Cmd</span>+<span class="kbd">P</span></span>
+    <a class="btn btn-sm btn-primary" href="#" onclick="window.print()"><i class="bi bi-printer me-1"></i>Imprimir</a>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <script>
+    // Quiz handler
+    document.querySelectorAll('#quiz button').forEach(btn=>{
+      btn.addEventListener('click', e=>{
+        const ok = e.target.dataset.answer === 'ok';
+        e.target.classList.remove('btn-outline-primary','btn-outline-secondary');
+        e.target.classList.add(ok? 'btn-success' : 'btn-danger');
+        document.getElementById('quizResult').classList.remove('d-none');
+      })
+    });
+
+    // Crucigrama simple
+    const btnCheck = document.getElementById('btnCheckCw');
+    const btnClear = document.getElementById('btnClearCw');
+    btnCheck.addEventListener('click', ()=>{
+      document.querySelectorAll('#cw .cell').forEach(c=>{
+        if(c.classList.contains('block')) return;
+        const val = (c.value||'').toUpperCase();
+        const sol = (c.dataset.solution||'').toUpperCase();
+        c.style.backgroundColor = (val===sol && val!=='' ) ? '#dcfce7' : '#fee2e2';
+      });
+    });
+    btnClear.addEventListener('click', ()=>{
+      document.querySelectorAll('#cw .cell').forEach(c=>{
+        if(c.classList.contains('block')) return;
+        c.value=''; c.style.backgroundColor='white';
+      });
+    });
+  </script>
+</body>
+</html>
